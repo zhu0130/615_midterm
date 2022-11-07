@@ -45,22 +45,29 @@ nonorgansales_2016_ca <- filter(strawb, State == 'CALIFORNIA' & Year == 2016 & D
 new_non <- filter(nonorgansales_2016_ca, Value != "(NA)" & Value != "(D)" & Domain != "TOTAL")
 CI(as.numeric(new_non$Value))
 #Q4
-chemical <- filter(strawb, Domain != 'ORGANIC STATUS' & Domain != "TOTAL" & Domain != 'FERTILIZER')
-length(unique(chemical$`Domain Category`))
-
+chemical <- filter(strawb, Domain != 'ORGANIC STATUS' & Domain != "TOTAL")
+temp1<-length(unique(chemical$`Domain Category`))
+total<-length(grep("TOTAL",
+                   chemical$`Domain Category`,
+                   ignore.case = T))
+chemical_num<-temp1-total
+chemical_num
 #Q5
 chemical_florida <- filter(strawb, State == 'FLORIDA' & 
                              Domain != 'ORGANIC STATUS' & 
-                             Domain != 'TOTAL' & 
-                             Domain != 'FERTILIZER')
+                             Domain != 'TOTAL'  
+                             )
 chemical_california <- filter(strawb, State == 'CALIFORNIA' & 
                                 Domain != 'ORGANIC STATUS' & 
-                                Domain != 'TOTAL' & 
-                                Domain != 'FERTILIZER')
+                                Domain != 'TOTAL'  
+                                )
 diff<-length(unique(chemical_california$`Domain Category`))-
   length(unique(chemical_florida$`Domain Category`))
 diff
-#so the difference is 138 - 115=23
+
+
+
+
 
 
 
