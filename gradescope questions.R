@@ -36,6 +36,7 @@ view(strawb)
 Q2 <- filter(strawb,Year == 2016 & State == 'CALIFORNIA'  
                              & Domain == 'ORGANIC STATUS')
 view(Q2)
+#look at the first line
 
 
 #Q3
@@ -43,15 +44,15 @@ library(gmodels)
 library(Rmisc)
 nonorgansales_2016_ca <- filter(strawb, State == 'CALIFORNIA' & Year == 2016 & Domain != 'ORGANIC STATUS')
 new_non <- filter(nonorgansales_2016_ca, Value != "(NA)" & Value != "(D)" & Domain != "TOTAL")
+view(new_non)
 CI(as.numeric(new_non$Value))
+#no cv thus NA
 #Q4
 chemical <- filter(strawb, Domain != 'ORGANIC STATUS' & Domain != "TOTAL")
+view(chemical)
 temp1<-length(unique(chemical$`Domain Category`))
-total<-length(grep("TOTAL",
-                   chemical$`Domain Category`,
-                   ignore.case = T))
-chemical_num<-temp1-total
-chemical_num
+temp1
+
 #Q5
 chemical_florida <- filter(strawb, State == 'FLORIDA' & 
                              Domain != 'ORGANIC STATUS' & 
